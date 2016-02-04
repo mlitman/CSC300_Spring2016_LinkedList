@@ -20,6 +20,7 @@ public class LinkedList
 
     public void display()
     {
+        //changed
         //this.layout.removeAllViews();
         if(this.head == null)
         {
