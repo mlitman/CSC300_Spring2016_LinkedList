@@ -19,6 +19,29 @@ public class LinkedList
         this.count = 0;
     }
 
+    public int indexOf(Node n)
+    {
+        if(this.head != null)
+        {
+            int pos = 0;
+            Node currNode = this.head;
+            do
+            {
+                if(currNode == n)
+                {
+                    return pos;
+                }
+                else
+                {
+                    pos++;
+                    currNode = currNode.getNextNode();
+                }
+            }
+            while(currNode != null);
+        }
+        return -1;
+    }
+
     public void display()
     {
         this.layout.removeAllViews();

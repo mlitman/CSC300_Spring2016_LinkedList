@@ -11,5 +11,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="15"
         android:id="@+id/theValueTF"
-        android:gravity="center"/>
+        android:gravity="center"
+        />
 </LinearLayout>
