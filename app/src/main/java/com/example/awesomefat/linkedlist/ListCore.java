@@ -1,5 +1,6 @@
 package com.example.awesomefat.linkedlist;
 
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 
 /**
@@ -9,4 +10,5 @@ public class ListCore
 {
     public static LayoutInflater inflater;
     public static LinkedList ll;
+    public static AppCompatActivity mainActivity;
 }

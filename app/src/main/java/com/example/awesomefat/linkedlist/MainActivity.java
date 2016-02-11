@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
 
+        //let ListCore know about me
+        ListCore.mainActivity = this;
+
         //give ourselves programmatic access to the buttons and edit text
         this.addFrontButton = (Button)this.findViewById(R.id.addFrontButton);
         this.addEndButton = (Button)this.findViewById(R.id.addEndButton);

@@ -1,9 +1,13 @@
 package com.example.awesomefat.linkedlist;
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+
+import java.util.List;
 
 /**
  * Created by awesomefat on 1/28/16.
@@ -43,9 +47,24 @@ public class Node
                 //in the Linked List.  Update this to remove myself from the linked list
                 //and then ask the list to display itself, which should update the entire
                 //view.  That is to say, we will no longer need to hide ourself.
-                System.out.println("***** Text Was Clicked: " + payload);
-                valueLabel.setVisibility(View.GONE);
-                System.out.println("**** Position = " + ListCore.ll.indexOf(myself));
+                //valueLabel.setVisibility(View.GONE);
+
+                PopupMenu popup = new PopupMenu(ListCore.mainActivity, v);
+                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener()
+                {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item)
+                    {
+                        if (item.getTitle().equals("DELETE"))
+                        {
+                            ListCore.ll.removeAtIndex(ListCore.ll.indexOf(myself));
+                            ListCore.ll.display();
+                        }
+                        return true;
+                    }
+                });
+                popup.show();//showing popup menu
 
             }
         });
