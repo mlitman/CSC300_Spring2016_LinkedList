@@ -28,15 +28,24 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                android:gravity="center"
+                android:weightSum="1">
 
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="141dp"
                     android:layout_height="56dp"
                     android:id="@+id/newValueET"
                     android:editable="true"
                     android:enabled="true"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_weight="0.83"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="stack ->"
+                    android:id="@+id/button"
+                    android:onClick="stackButtonClicked"/>
 
             </LinearLayout>
 
