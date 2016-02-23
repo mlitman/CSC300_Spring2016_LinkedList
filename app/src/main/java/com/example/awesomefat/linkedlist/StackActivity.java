@@ -1,30 +1,33 @@
 package com.example.awesomefat.linkedlist;
 
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.View;
 
 public class StackActivity extends AppCompatActivity
 {
-    int count = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stack);
 
-        TextView title = (TextView)this.findViewById(R.id.stackTitle);
-        title.setText("Count = " + count);
-        this.count++;
+        TOHCore.tower1 = new TowerFragment();
+        TOHCore.tower2 = new TowerFragment();
+        TOHCore.tower3 = new TowerFragment();
+        this.getSupportFragmentManager().beginTransaction().add(R.id.tower1, TOHCore.tower1).commit();
+        this.getSupportFragmentManager().beginTransaction().add(R.id.tower2, TOHCore.tower2).commit();
+        this.getSupportFragmentManager().beginTransaction().add(R.id.tower3, TOHCore.tower3).commit();
     }
 
     @Override
-    protected void onResume()
+    protected void onStart()
     {
-        super.onResume();
-        TextView title = (TextView)this.findViewById(R.id.stackTitle);
-        title.setText("Count = " + count);
-        this.count++;
+        super.onStart();
+        TOHCore.tower1.addDisk(4);
+        TOHCore.tower1.addDisk(7);
+        TOHCore.tower1.addDisk(10);
     }
 }
+

@@ -130,9 +130,22 @@ public class LinkedList
         this.layout.addView(v);
     }
 
-    public Node getAtIndex(int i)
+    public Node getAtIndex(int pos)
     {
-        return null;
+        if(pos < 0 || pos >= this.count)
+        {
+            System.err.println("Linked List Index Out of Bounds");
+            return null;
+        }
+        else
+        {
+            Node nodeToReturn = this.head;
+            for(int i = 0; i < pos; i++)
+            {
+                nodeToReturn = nodeToReturn.getNextNode();
+            }
+            return nodeToReturn;
+        }
     }
 
     //inefficient, but accurate
