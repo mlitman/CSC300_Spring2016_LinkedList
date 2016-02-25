@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         ListCore.inflater = this.getLayoutInflater();
 
         LinearLayout svLL = (LinearLayout)this.findViewById(R.id.scrollViewLL);
-        ListCore.ll = new LinkedList(svLL);
+        ListCore.ll = new StringLinkedList(svLL);
         //ll.addFront("1");
         //ll.addFront("2");
         //ll.addFront("3");

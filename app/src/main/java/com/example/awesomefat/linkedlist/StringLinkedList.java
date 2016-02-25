@@ -7,12 +7,12 @@ import android.widget.TextView;
 /**
  * Created by awesomefat on 1/28/16.
  */
-public class LinkedList
+public class StringLinkedList
 {
     private Node head;
     private LinearLayout layout;
     public int count;
-    public LinkedList(LinearLayout layout)
+    public StringLinkedList(LinearLayout layout)
     {
         this.head = null;
         this.layout = layout;

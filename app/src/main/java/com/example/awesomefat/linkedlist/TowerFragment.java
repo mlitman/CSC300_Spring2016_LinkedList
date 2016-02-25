@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.util.*;
 
 public class TowerFragment extends Fragment
 {
@@ -17,6 +18,8 @@ public class TowerFragment extends Fragment
     private LinearLayout towerLayout;
     private ViewGroup towerGroup;
     private LayoutInflater theInflater;
+    private LinkedList<View> theDisks = new LinkedList<View>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +39,19 @@ public class TowerFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                TOHCore.toggleTowerButtons(myself);
+                Button b = (Button)v;
+                if(b.getText().toString().equalsIgnoreCase("POP"))
+                {
+                    popDisk();
+                    TOHCore.toggleTowerButtons(myself);
+                }
+                else
+                {
+                    pushDisk(TOHCore.poppedDisk);
+                    TOHCore.poppedDisk = null;
+                    TOHCore.resetTowerButtons();
+                }
+
             }
         });
         return this.towerView;
@@ -45,6 +60,22 @@ public class TowerFragment extends Fragment
     public void setButtonText(String s)
     {
         this.theButton.setText(s);
+    }
+
+    public void popDisk()
+    {
+        if(this.theDisks.size() > 0)
+        {
+            View diskToPop = this.theDisks.removeLast();
+            this.towerLayout.removeView(diskToPop);
+            TOHCore.poppedDisk = diskToPop;
+        }
+    }
+
+    public void pushDisk(View disk)
+    {
+        this.theDisks.addLast(disk);
+        this.towerLayout.addView(disk, 0);
     }
 
     public void addDisk(int size)
@@ -60,5 +91,6 @@ public class TowerFragment extends Fragment
         this.towerLayout.removeView(this.theButton);
         this.towerLayout.addView(disk);
         this.towerLayout.addView(this.theButton);
+        this.theDisks.push(disk);
     }
 }
