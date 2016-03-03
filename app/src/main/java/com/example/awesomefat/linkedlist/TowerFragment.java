@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
 import java.util.*;
 
 public class TowerFragment extends Fragment
@@ -39,17 +43,19 @@ public class TowerFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                Button b = (Button)v;
-                if(b.getText().toString().equalsIgnoreCase("POP"))
+                Button b = (Button) v;
+                if (b.getText().toString().equalsIgnoreCase("POP"))
                 {
                     popDisk();
                     TOHCore.toggleTowerButtons(myself);
                 }
                 else
                 {
-                    pushDisk(TOHCore.poppedDisk);
-                    TOHCore.poppedDisk = null;
-                    TOHCore.resetTowerButtons();
+                    if(pushDisk(TOHCore.poppedDisk))
+                    {
+                        TOHCore.poppedDisk = null;
+                        TOHCore.resetTowerButtons();
+                    }
                 }
 
             }
@@ -72,10 +78,33 @@ public class TowerFragment extends Fragment
         }
     }
 
-    public void pushDisk(View disk)
+    public boolean pushDisk(View disk)
     {
-        this.theDisks.addLast(disk);
-        this.towerLayout.addView(disk, 0);
+        TextView l = (TextView)disk.findViewById(R.id.diskLabel);
+        int newDiskWidth = l.getWidth();
+
+        int topDiskWidth = -1;
+        if(this.theDisks.size() > 0)
+        {
+            TextView topLabel = (TextView) this.theDisks.getLast().findViewById(R.id.diskLabel);
+            topDiskWidth = topLabel.getWidth();
+        }
+
+        if(topDiskWidth == -1 || newDiskWidth < topDiskWidth)
+        {
+            this.theDisks.addLast(disk);
+            this.towerLayout.addView(disk, 0);
+
+            //check for a winner
+            System.out.println("*****" + TOHCore.tower3.theDisks.size());
+            if(TOHCore.tower3.theDisks.size() == 3)
+            {
+                Toast.makeText(this.getContext(), "WINNER!!!", Toast.LENGTH_LONG).show();
+            }
+            return true;
+        }
+        Toast.makeText(this.getContext(), "Illegal Move", Toast.LENGTH_SHORT).show();
+        return false;
     }
 
     public void addDisk(int size)
